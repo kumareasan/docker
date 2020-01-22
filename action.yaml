@@ -8,20 +8,45 @@ inputs:
     description: 'The dockerfile used by the docker build command'
     required: true
   deploy-action-repo:
-    description: 'a deployment will be invoked on this repo after image push'
+    description: 'Deployment will be invoked on this repo after image push'
     required: true
-
+  dockerhub-username:
+    description: 'Dockerhub username'
+    required: true
+  dockerhub-password:
+    description: 'Dockerhub password'
+    required: true
+  github-pat:
+    description: 'Github personal access token to be used to call the deploy-action-repo'
+    required: true
+  npm-registry:
+    description: 'NPM registry url'
+    required: true
+  npm-user:
+    description: 'NPM registry username'
+    required: true
+  npm-pass:
+    description: 'NPM registry pasword'
+    required: true
+  npm-email:
+    description: 'NPM users email address'
+    required: true
+  github-ref: 
+    descripiton: 'branch ref'
+    required: true
+  
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.image-name }}
     - ${{ inputs.docker-file }}
-    - ${{ secrets.DOCKER_USERNAME }}
-    - ${{ secrets.DOCKER_PASSWORD }}
-    - ${{ secrets.GITHUB_PAT }}
-    - ${{ secrets.NPM_REGISTRY }}
-    - ${{ secrets.NPM_USER }}
-    - ${{ secrets.NPM_PASS }}
-    - ${{ secrets.NPM_EMAIL }}
+    - ${{ inputs.dockerhub-username }}
+    - ${{ inputs.dockerhub-password }}
+    - ${{ inputs.github-pat }}
+    - ${{ inputs.npm-registry }}
+    - ${{ inputs.npm-user }}
+    - ${{ inputs.npm-pass }}
+    - ${{ inputs.npm-email }}
     - ${{ inputs.deploy-action-repo }}
+    - ${{ imputs.github-ref }}
