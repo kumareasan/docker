@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash
 IMAGE_NAME=$1
 DOCKER_FILE=$2
 DOCKER_USERNAME=$3
