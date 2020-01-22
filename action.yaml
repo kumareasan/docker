@@ -1,0 +1,23 @@
+name: 'Deploy'
+description: 'Build docker image, push it to dockerhub and initiate deployment'
+inputs:
+  image-name:
+    description: 'The docker container image name'
+    required: true
+  docker-file:
+    description: 'The dockerfile used by the docker build command'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.image-name }}
+    - ${{ inputs.docker-file }}
+    - ${{ secrets.DOCKER_USERNAME }}
+    - ${{ secrets.DOCKER_PASSWORD }}
+    - ${{ secrets.GITHUB_PAT }}
+    - ${{ secrets.NPM_REGISTRY }}
+    - ${{ secrets.NPM_USER }}
+    - ${{ secrets.NPM_PASS }}
+    - ${{ secrets.NPM_EMAIL }}
