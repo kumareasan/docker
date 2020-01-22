@@ -1,16 +1,16 @@
-#!/bin/bash
-IMAGE_NAME=$1
-DOCKER_FILE=$2
-DOCKER_USERNAME=$3
-DOCKER_PASSWORD=$4
-GITHUB_PAT=$5
-NPM_REGISTRY=$6
-NPM_USER=$7
-NPM_PASS=$8
-NPM_EMAIL=$9
-DEPLOY_ACTION_REPO=$10
-GITHUB_REF=$11
-GITHUB_SHA=$12
+#!/bin/bash -e
+# IMAGE_NAME=$1
+# DOCKER_FILE=$2
+# DOCKER_USERNAME=$3
+# DOCKER_PASSWORD=$4
+# GITHUB_PAT=$5
+# NPM_REGISTRY=$6
+# NPM_USER=$7
+# NPM_PASS=$8
+# NPM_EMAIL=$9
+# DEPLOY_ACTION_REPO=$10
+# GITHUB_REF=$11
+# GITHUB_SHA=$12
 
 echo $IMAGE_NAME
 echo $DOCKER_FILE
@@ -31,7 +31,7 @@ docker build \
   --build-arg npm_user=$NPM_USER \
   --build-arg npm_pass=$NPM_PASS \
   --build-arg npm_email=$NPM_EMAIL \
-  -f $DOCKER_FILE.dev -t $IMAGE_NAME:${GITHUB_SHA::7} .
+  -f $DOCKER_FILE -t $IMAGE_NAME:${GITHUB_SHA::7} .
 
 docker push $IMAGE_NAME:${GITHUB_SHA::7}
 REGEX="[a-zA-Z]+-[0-9]{1,5}"

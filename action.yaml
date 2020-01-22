@@ -21,16 +21,16 @@ inputs:
     required: true
   npm-registry:
     description: 'NPM registry url'
-    required: true
+    required: false
   npm-user:
     description: 'NPM registry username'
-    required: true
+    required: false
   npm-pass:
     description: 'NPM registry pasword'
-    required: true
+    required: false
   npm-email:
     description: 'NPM users email address'
-    required: true
+    required: false
   github-ref: 
     descripiton: 'branch ref'
     required: true
@@ -40,17 +40,16 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.image-name }}
-    - ${{ inputs.docker-file }}
-    - ${{ inputs.dockerhub-username }}
-    - ${{ inputs.dockerhub-password }}
-    - ${{ inputs.github-pat }}
-    - ${{ inputs.npm-registry }}
-    - ${{ inputs.npm-user }}
-    - ${{ inputs.npm-pass }}
-    - ${{ inputs.npm-email }}
-    - ${{ inputs.deploy-action-repo }}
-    - ${{ imputs.github-ref }}
-    - ${{ inputs.github-sha }}
-    
+  env:
+    IMAGE_NAME: ${{ inputs.image-name }}
+    DOCKER_FILE: ${{ inputs.docker-file }}
+    DOCKERHUB_USERNAME: ${{ inputs.dockerhub-username }}
+    DOCKERHUB_PASSWORD: ${{ inputs.dockerhub-password }}
+    GITHUB_PAT: ${{ inputs.github-pat }}
+    NPM_REGISTRY: ${{ inputs.npm-registry }}
+    NPM_USER: ${{ inputs.npm-user }}
+    NPM_PASS: ${{ inputs.npm-pass }}
+    NPM_EMAIL: ${{ inputs.npm-email }}
+    DEPLOY_ACTION_REPO: ${{ inputs.deploy-action-repo }}
+    GITHUB_REFL: ${{ imputs.github-ref }}
+    GITHUB_SHA: ${{ inputs.github-sha }}
