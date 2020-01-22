@@ -46,11 +46,11 @@ runs:
     - ${{ inputs.dockerhub-username }}
     - ${{ inputs.dockerhub-password }}
     - ${{ inputs.github-pat }}
+    - ${{ inputs.deploy-action-repo }}
+    - ${{ imputs.github-ref }}
+    - ${{ inputs.github-sha }}
     - ${{ inputs.npm-registry }}
     - ${{ inputs.npm-user }}
     - ${{ inputs.npm-pass }}
     - ${{ inputs.npm-email }}
-    - ${{ inputs.deploy-action-repo }}
-    - ${{ imputs.github-ref }}
-    - ${{ inputs.github-sha }}
     
