@@ -7,7 +7,7 @@ inputs:
   docker-file:
     description: 'The dockerfile used by the docker build command'
     required: true
-  inputs.deploy-action-repo:
+  deploy-action-repo:
     description: 'a deployment will be invoked on this repo after image push'
     required: true
 
