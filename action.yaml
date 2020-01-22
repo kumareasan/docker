@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: 'build and push to dockerhub and initiate deploment'
 description: 'Build docker image, push it to dockerhub and initiate deployment'
 inputs:
   image-name:
@@ -6,6 +6,9 @@ inputs:
     required: true
   docker-file:
     description: 'The dockerfile used by the docker build command'
+    required: true
+  inputs.deploy-action-repo:
+    description: 'a deployment will be invoked on this repo after image push'
     required: true
 
 runs:
@@ -21,3 +24,4 @@ runs:
     - ${{ secrets.NPM_USER }}
     - ${{ secrets.NPM_PASS }}
     - ${{ secrets.NPM_EMAIL }}
+    - ${{ inputs.deploy-action-repo }}

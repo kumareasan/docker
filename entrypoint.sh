@@ -9,6 +9,7 @@ NPM_REGISTRY=$6
 NPM_USER=$7
 NPM_PASS=$8
 NPM_EMAIL=$9
+DEPLOY_ACTION_REPO=$10
 
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 docker build \
@@ -21,12 +22,12 @@ docker build \
 docker push $IMAGE_NAME:${GITHUB_SHA::7}
 REGEX="[a-zA-Z]+-[0-9]{1,5}"
 if [[ $GITHUB_REF = "develop" ]]; then
-  echo "running on develop branch, pushing image with tag: latest"
+  echo ">>>> Pushing image with tag: latest"
   docker tag $IMAGE_NAME:${GITHUB_SHA::7} $IMAGE_NAME:latest
   docker push $IMAGE_NAME:latest
 elif [[ $GITHUB_REF =~ $REGEX ]]; then
   tag=${BASH_REMATCH[0]}
-  echo "running on a feture branch: $GITHUB_REF, pushing image with tag: $tag"
+  echo ">>>> Pushing image with tag: $tag"
   docker tag $IMAGE_NAME:${GITHUB_SHA::7} $IMAGE_NAME:$tag
   docker push $IMAGE_NAME:$tag
 fi
@@ -41,7 +42,7 @@ fi
 REGEX="[a-zA-Z]+-[0-9]{1,5}"
 if [[ $GITHUB_REF = "refs/heads/develop" ]]; then
   curl -X POST \
-    https://api.github.com/repos/bluescape/infrastructure/deployments \
+    https://api.github.com/repos/$DEPLOY_ACTION_REPO/deployments \
     -H 'Accept: application/vnd.github.ant-man-preview+json' \
     -H 'Authorization: token "'"$GITHUB_PAT"'"' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -49,7 +50,7 @@ if [[ $GITHUB_REF = "refs/heads/develop" ]]; then
 elif [[ $GITHUB_REF =~ $REGEX ]]; then
   task=${BASH_REMATCH[0]}
   curl -X POST \
-    https://api.github.com/repos/bluescape/infrastructure/deployments \
+    https://api.github.com/repos/$DEPLOY_ACTION_REPO/deployments \
     -H 'Accept: application/vnd.github.ant-man-preview+json' \
     -H 'Authorization: token "'"$GITHUB_PAT"'"' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
