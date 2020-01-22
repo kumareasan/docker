@@ -43,8 +43,8 @@ runs:
   env:
     IMAGE_NAME: ${{ inputs.image-name }}
     DOCKER_FILE: ${{ inputs.docker-file }}
-    DOCKERHUB_USERNAME: ${{ inputs.dockerhub-username }}
-    DOCKERHUB_PASSWORD: ${{ inputs.dockerhub-password }}
+    DOCKER_USERNAME: ${{ inputs.dockerhub-username }}
+    DOCKER_PASSWORD: ${{ inputs.dockerhub-password }}
     GITHUB_PAT: ${{ inputs.github-pat }}
     NPM_REGISTRY: ${{ inputs.npm-registry }}
     NPM_USER: ${{ inputs.npm-user }}
