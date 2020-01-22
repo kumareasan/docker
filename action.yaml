@@ -34,6 +34,8 @@ inputs:
   github-ref: 
     descripiton: 'branch ref'
     required: true
+  github-sha:
+    required: true
   
 runs:
   using: 'docker'
@@ -50,3 +52,5 @@ runs:
     - ${{ inputs.npm-email }}
     - ${{ inputs.deploy-action-repo }}
     - ${{ imputs.github-ref }}
+    - ${{ inputs.github-sha }}
+    
