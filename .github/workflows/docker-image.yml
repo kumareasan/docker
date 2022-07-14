@@ -17,4 +17,4 @@ jobs:
       run: |
         echo "${{ secrets.PASSWORD }}" | docker login -u "zlearn" --password-stdin
         docker image build -t zlearn/gitaction:v1 .
-        docker push dab8106/gitaction:v1
+        docker push zlearn/gitaction:v1
