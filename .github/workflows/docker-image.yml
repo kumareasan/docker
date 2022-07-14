@@ -1,11 +1,20 @@
- name: Release to Docker Hub
+name: Python application
 
 on:
   push:
-    branches: [ "master" ]
+   branches: [ master ]
   pull_request:
-    branches: [ "master" ]    
-          
+    branches: [ master ]
+      
 jobs:
-  build-and-test:
+  build:
+
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build & Push Image
+      run: |
+        echo "${{ secrets.PASSWORD }}" | docker login -u "zlearn" --password-stdin
+        docker image build -t zlearn/gitaction:v1 .
+        docker push dab8106/gitaction:v1
