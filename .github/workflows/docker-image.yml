@@ -16,5 +16,5 @@ jobs:
     - name: Build & Push Image
       run: |
         echo "${{ secrets.PASSWORD }}" | docker login -u "zlearn" --password-stdin
-        docker image build -t zlearn/gitaction:v1 .
-        docker push zlearn/gitaction:v1
+        docker image build -t zlearn/ubuntu22:latest .
+        docker push zlearn/ubuntu22:latest
